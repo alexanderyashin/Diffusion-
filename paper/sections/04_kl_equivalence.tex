@@ -1,0 +1,141 @@
+% ============================================================
+% 04_kl_equivalence.tex
+% ============================================================
+
+\section{Hypothesis Testing View: KL Divergence and Local Equivalence to Fisher Information}
+\label{sec:kl_equivalence}
+
+In this section we establish the precise relationship between estimation-based and
+hypothesis-testing-based notions of temporal distinguishability. We show that, under
+standard regularity conditions, the Kullback--Leibler (KL) divergence between
+distributions at times $t$ and $t+\Delta t$ is locally governed by the same Fisher
+information that determines the Cramér--Rao bound.
+
+\subsection{KL Divergence Between Nearby Times}
+
+Consider two distributions from a regular parametric family
+$p(x \mid t)$ and $p(x \mid t+\Delta t)$. The KL divergence is defined as
+\begin{equation}
+D_{\mathrm{KL}}\!\left(
+p(x \mid t)\,\|\,p(x \mid t+\Delta t)
+\right)
+=
+\mathbb{E}_{t}
+\left[
+\log \frac{p(X \mid t)}{p(X \mid t+\Delta t)}
+\right].
+\end{equation}
+
+For sufficiently smooth likelihoods, a Taylor expansion of
+$\log p(x \mid t+\Delta t)$ around $t$ yields
+\begin{equation}
+\log p(x \mid t+\Delta t)
+=
+\log p(x \mid t)
++
+\Delta t \, \partial_t \log p(x \mid t)
++
+\frac{(\Delta t)^2}{2} \, \partial_t^2 \log p(x \mid t)
++
+R_3(x,\Delta t),
+\end{equation}
+where the remainder term satisfies
+$|R_3(x,\Delta t)| \le C |\Delta t|^3$ uniformly in a neighborhood of $t$ under
+standard regularity conditions (existence of bounded third derivatives and dominated
+convergence).
+
+Substituting into the definition of $D_{\mathrm{KL}}$ and using
+$\mathbb{E}_t[\partial_t \log p(X\mid t)] = 0$, we obtain
+\begin{equation}
+D_{\mathrm{KL}}\!\left(
+p(x \mid t)\,\|\,p(x \mid t+\Delta t)
+\right)
+=
+\frac{(\Delta t)^2}{2}
+\mathbb{E}_t\!\left[
+\left(\partial_t \log p(X \mid t)\right)^2
+\right]
++ O\!\left((\Delta t)^3\right).
+\end{equation}
+
+The expectation in the leading term is precisely the Fisher information $I_1(t)$.
+Hence,
+\begin{equation}
+D_{\mathrm{KL}}\!\left(
+p(x \mid t)\,\|\,p(x \mid t+\Delta t)
+\right)
+=
+\frac{1}{2} I_1(t) (\Delta t)^2
++ O\!\left((\Delta t)^3\right).
+\end{equation}
+
+\subsection{Multiple Observations}
+
+For $N_{\mathrm{eff}}$ independent or effectively independent observations, KL
+divergence is additive:
+\begin{equation}
+D_{\mathrm{KL}}^{(\mathrm{total})}
+=
+N_{\mathrm{eff}}
+D_{\mathrm{KL}}^{(1)} .
+\end{equation}
+
+Therefore,
+\begin{equation}
+D_{\mathrm{KL}}^{(\mathrm{total})}(t,\Delta t)
+=
+\frac{1}{2}
+I_{\mathrm{eff}}(t)
+(\Delta t)^2
++ O\!\left(N_{\mathrm{eff}}(\Delta t)^3\right).
+\end{equation}
+
+\subsection{Operational Thresholds and Error Probabilities}
+
+To relate KL divergence to hypothesis-testing performance, consider a binary test
+between hypotheses $H_0: t$ and $H_1: t+\Delta t$. Standard inequalities in
+information theory provide bounds between KL divergence and achievable error
+probabilities.
+
+In particular, the Bretagnolle--Huber inequality implies
+\begin{equation}
+P_e \ge \frac{1}{4} \exp\!\left(-D_{\mathrm{KL}}^{(\mathrm{total})}\right),
+\end{equation}
+where $P_e$ is the minimal achievable total error probability.
+
+Fixing a target error level $P_e \le p^\ast$, it suffices to require
+\begin{equation}
+D_{\mathrm{KL}}^{(\mathrm{total})}
+\ge
+C(p^\ast)
+:=
+\log\!\left(\frac{1}{4 p^\ast}\right).
+\end{equation}
+
+Alternative choices of constants based on Pinsker's, Chernoff, or symmetric KL bounds
+lead to equivalent definitions that differ only by fixed numerical factors and do not
+affect scaling results.
+
+\subsection{Equivalence of Estimation and Testing Criteria}
+
+Combining the local KL expansion with the threshold above yields
+\begin{equation}
+\Delta t_{\min}^{\mathrm{KL}}(t; p^\ast)
+=
+\sqrt{
+\frac{2 C(p^\ast)}{I_{\mathrm{eff}}(t)}
+}
+\left[1 + O(\Delta t)\right].
+\end{equation}
+
+Up to the explicit constant $\sqrt{2C(p^\ast)}$, this coincides with the
+estimation-based distinguishability $\Delta t_{\min}^{\mathrm{CRLB}}$ derived in
+Section~\ref{sec:normal_diffusion_crlb}. The two notions are therefore locally
+equivalent and define the same operational temporal resolution.
+
+\subsection{Interpretational Remark}
+
+The equivalence established here ensures that temporal distinguishability is not an
+artifact of a particular inference paradigm. Whether time is inferred via parameter
+estimation or discriminated via hypothesis testing, the fundamental limitation is set
+by the same Fisher information of the spatial distribution.

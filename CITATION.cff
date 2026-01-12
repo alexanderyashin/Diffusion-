@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use or discuss this work, please cite it as below."
+title: "Information-Theoretic Limits of Time Distinguishability in Diffusion and Anomalous Diffusion"
+type: software
+authors:
+  - family-names: Yashin
+    given-names: Alexander
+    email: alexander.yashin@yahoo.de
+    affiliation: Independent Researcher, Leipzig/Halle, Germany
+version: "1.0.0"
+date-released: 2026-01-11
+license: MIT
+repository-code: "https://github.com/alexanderyashin/Diffusion"
+keywords:
+  - diffusion
+  - anomalous diffusion
+  - information theory
+  - Fisher information
+  - Kullback-Leibler divergence
+  - time distinguishability
+  - photon-limited microscopy
+abstract: >
+  This repository contains analytical and numerical results establishing
+  information-theoretic limits on temporal distinguishability in diffusive
+  and anomalously diffusive systems. Time is treated as an inferred quantity
+  constrained by stochastic dynamics, finite statistics, and measurement noise.
+preferred-citation:
+  type: article
+  title: "Information-Theoretic Limits of Time Distinguishability in Diffusion and Anomalous Diffusion"
+  authors:
+    - family-names: Yashin
+      given-names: Alexander
+  year: 2026
+  publisher: Zenodo

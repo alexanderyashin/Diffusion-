@@ -1,0 +1,158 @@
+% ============================================================
+% 03b_joint_estimation_fisher_matrix.tex
+% ============================================================
+
+\section{Joint Estimation: Fisher Information Matrix for $(t, D, \sigma_0)$}
+\label{sec:joint_estimation}
+
+A common criticism of single-parameter bounds is their reliance on unrealistically
+strong assumptions about known nuisance parameters. In this section we remove this
+limitation by deriving the full Fisher information matrix (FIM) for joint estimation
+of time $t$, diffusion coefficient $D$, and observation noise floor $\sigma_0$.
+
+\subsection{Observation Model}
+
+We consider the Gaussian observation model introduced previously,
+\begin{equation}
+p(x \mid t, D, \sigma_0)
+=
+\mathcal{N}\!\left(0,\, s(t,D,\sigma_0)\, I_d \right),
+\qquad
+s(t,D,\sigma_0) := 2Dt + \sigma_0^2 .
+\end{equation}
+
+The parameter vector is
+\[
+\theta := (t, D, \sigma_0^2),
+\]
+where $\sigma_0^2$ is used instead of $\sigma_0$ to ensure smoothness and to avoid
+spurious singularities in the Fisher information.
+
+\subsection{Score Functions}
+
+The log-likelihood for a single observation is
+\[
+\log p(x \mid \theta)
+=
+-\frac{d}{2}\log(2\pi s)
+-
+\frac{\|x\|^2}{2s}.
+\]
+
+The score functions are
+\begin{align}
+\partial_t \log p
+&=
+D\left(
+\frac{\|x\|^2}{s^2}
+-
+\frac{d}{s}
+\right),
+\\[6pt]
+\partial_D \log p
+&=
+t\left(
+\frac{\|x\|^2}{s^2}
+-
+\frac{d}{s}
+\right),
+\\[6pt]
+\partial_{\sigma_0^2} \log p
+&=
+\frac{1}{2}
+\left(
+\frac{\|x\|^2}{s^2}
+-
+\frac{d}{s}
+\right).
+\end{align}
+
+All three score functions are proportional to the same sufficient statistic,
+reflecting an intrinsic degeneracy of the inference problem.
+
+\subsection{Fisher Information Matrix}
+
+The Fisher information matrix for one observation is
+\[
+J_{ij} := \mathbb{E}\!\left[
+(\partial_{\theta_i}\log p)
+(\partial_{\theta_j}\log p)
+\right].
+\]
+
+Using Gaussian moment identities, we obtain
+\begin{equation}
+J^{(1)}
+=
+\frac{2d}{s^2}
+\begin{pmatrix}
+D^2 & Dt & \frac{D}{2} \\[6pt]
+Dt & t^2 & \frac{t}{2} \\[6pt]
+\frac{D}{2} & \frac{t}{2} & \frac{1}{4}
+\end{pmatrix}.
+\end{equation}
+
+This matrix has rank one, reflecting the fact that all parameters enter the model
+only through the single scalar combination $s=2Dt+\sigma_0^2$.
+
+For $N_{\mathrm{eff}}$ independent or effectively independent observations,
+\[
+J = N_{\mathrm{eff}} J^{(1)}.
+\]
+
+\subsection{Cramér--Rao Bound for Time Under Joint Estimation}
+
+Although the full parameter vector is not jointly identifiable from a single
+snapshot, meaningful marginal bounds can still be obtained. The covariance matrix
+of any unbiased estimator satisfies
+\[
+\mathrm{Cov}(\hat\theta) \succeq J^{-1},
+\]
+where the inverse is understood in the sense of the Moore--Penrose pseudoinverse.
+
+The marginal lower bound for the variance of $\hat t$ is therefore
+\[
+\mathrm{Var}(\hat t)
+\ge
+(J^{-1})_{tt}.
+\]
+
+Direct inversion yields
+\begin{equation}
+(J^{-1})_{tt}
+=
+\frac{s^2}{2d N_{\mathrm{eff}} D^2}
+\left(
+1 + \frac{\sigma_0^2}{2Dt}
+\right).
+\end{equation}
+
+Equivalently,
+\begin{equation}
+\mathrm{Var}(\hat t)
+\ge
+\frac{(2Dt + \sigma_0^2)^2}{2d D^2 N_{\mathrm{eff}}}
+\left(
+1 + \frac{\sigma_0^2}{2Dt}
+\right).
+\end{equation}
+
+\subsection{Interpretation}
+
+The additional factor
+\[
+1 + \frac{\sigma_0^2}{2Dt}
+\]
+quantifies the degradation of temporal precision due to joint estimation of nuisance
+parameters. In the diffusion-dominated regime ($2Dt \gg \sigma_0^2$), this factor
+approaches unity and the single-parameter CRLB is recovered. In the PSF-dominated
+regime, the penalty diverges, reflecting the fundamental non-identifiability of $t$
+when spatial broadening is dominated by observation noise.
+
+\subsection{Identifiability and Degeneracy}
+
+The structure of the Fisher information matrix makes explicit that time $t$, diffusion
+coefficient $D$, and noise floor $\sigma_0^2$ cannot be independently identified from
+a single snapshot without additional constraints, calibration, or multi-time data.
+This degeneracy is not a weakness of the bound but an intrinsic property of the
+inference problem and reinforces the operational nature of time distinguishability.

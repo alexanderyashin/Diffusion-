@@ -1,0 +1,87 @@
+% ============================================================
+% preamble.tex
+% ============================================================
+
+% ------------------------------------------------------------
+% Engine detection (pdfLaTeX vs XeLaTeX/LuaLaTeX)
+% ------------------------------------------------------------
+\usepackage{iftex}
+
+\ifPDFTeX
+  % ----------------------------------------------------------
+  % Encoding and fonts (pdfLaTeX)
+  % ----------------------------------------------------------
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\else
+  % ----------------------------------------------------------
+  % Fonts (XeLaTeX / LuaLaTeX)
+  % ----------------------------------------------------------
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+\fi
+
+% ------------------------------------------------------------
+% Page layout
+% ------------------------------------------------------------
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% ------------------------------------------------------------
+% Typography and spacing
+% ------------------------------------------------------------
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.15}
+
+% ------------------------------------------------------------
+% Mathematics
+% ------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{bm}
+
+% ------------------------------------------------------------
+% Figures and tables
+% ------------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% ------------------------------------------------------------
+% Lists
+% ------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{nosep}
+
+% ------------------------------------------------------------
+% Misc (used sparingly)
+% ------------------------------------------------------------
+\usepackage{physics}   % for \dv, \expval, etc.
+
+% ------------------------------------------------------------
+% Theorem environments (minimal)
+% ------------------------------------------------------------
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+% ------------------------------------------------------------
+% References and links (load late)
+% ------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={Information-Theoretic Limits of Time Distinguishability},
+  pdfauthor={Alexander Yashin}
+}
+\urlstyle{same}
+
+% ------------------------------------------------------------
+% End of preamble
+% ------------------------------------------------------------

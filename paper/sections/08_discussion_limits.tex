@@ -1,0 +1,142 @@
+% ============================================================
+% 08_discussion_limits.tex
+% ============================================================
+
+\section{Discussion: Assumptions, Limits, and Scope}
+\label{sec:discussion}
+
+This section critically examines the assumptions underlying the framework,
+clarifies the role of numerical constants, and delineates the precise domain
+of validity. Its purpose is to pre-empt common objections and to make explicit
+what the theory does and does not claim.
+
+\subsection{On the Role of Numerical Constants}
+
+Throughout the paper, scaling relations are emphasized over exact prefactors.
+This is intentional.
+
+\paragraph{Statistical thresholds.}
+Both the Cramér--Rao bound and the KL-divergence criterion define limits
+conditional on a chosen confidence level or hypothesis-testing threshold.
+Once such a threshold is fixed, all numerical constants are fully specified.
+Different choices alter only prefactors, not scaling laws.
+
+\paragraph{Universality.}
+The exponents $1/2$, $1/3$, $1-\alpha$, and $(2-\alpha)/3$ are invariant
+under estimator choice, confidence level, and experimental implementation
+within the stated model classes. This invariance is the physically meaningful
+content of the theory.
+
+\subsection{Estimator Dependence and Optimality}
+
+The CRLB represents a lower bound achievable only by asymptotically efficient
+estimators.
+
+\begin{itemize}
+\item Suboptimal estimators may yield larger $\Delta t_{\min}$,
+\item No estimator can improve the predicted scalings without violating
+information-theoretic bounds under the stated assumptions.
+\end{itemize}
+
+Thus, experimental deviations toward \emph{worse} resolution do not refute
+the theory, while systematic improvements beyond the bound do.
+
+\subsection{Sample Independence and Correlations}
+
+The derivations assume independent samples.
+In practice, correlations arise from:
+
+\begin{itemize}
+\item Motion blur due to finite exposure time,
+\item Trajectory oversampling,
+\item Viscoelastic memory effects.
+\end{itemize}
+
+These effects reduce the effective sample size $N_{\mathrm{eff}} < N$.
+Replacing $N$ by $N_{\mathrm{eff}}$ restores the validity of the bounds.
+Failure to account for correlations reflects an experimental limitation,
+not a theoretical loophole.
+
+\subsection{Gaussianity and Non-Gaussian Extensions}
+
+The analytical Fisher-information results rely on Gaussian propagators.
+This assumption holds for:
+
+\begin{itemize}
+\item Free Brownian motion,
+\item Fractional Brownian motion (locally Gaussian increments).
+\end{itemize}
+
+For non-Gaussian processes (e.g., CTRW with power-law waiting times),
+closed-form Fisher-information expressions may not exist.
+In such cases:
+
+\begin{itemize}
+\item KL-divergence remains well-defined and computable numerically,
+\item Monte Carlo estimation of distinguishability is sufficient,
+\item The framework remains operationally valid.
+\end{itemize}
+
+\subsection{Why This Is Not Trivial Experimental Resolution}
+
+A frequent objection is that $\Delta t_{\min}$ merely reflects experimental
+limitations.
+
+This interpretation is incorrect within the stated model classes.
+
+\begin{enumerate}
+\item The bounds are derived from \emph{probability distributions}, not from
+hardware specifications.
+\item Even idealized detectors cannot surpass the limits without access to
+additional information beyond the spatial statistics considered here.
+\item The photon-limited $\Phi^{-1/3}$ scaling is nontrivial and counterintuitive,
+      differing fundamentally from standard $1/\sqrt{N}$ noise reduction.
+\end{enumerate}
+
+The limits are therefore fundamental to inference, not to instrumentation.
+
+\subsection{Relation to Other Time Scales}
+
+The present $\Delta t_{\min}$ must be distinguished from:
+
+\begin{itemize}
+\item Nyquist sampling limits (signal discretization),
+\item First-passage times (event statistics),
+\item Quantum uncertainty bounds on clocks.
+\end{itemize}
+
+Here, time is neither a sampling interval nor a physical observable,
+but a parameter inferred from spatial probability distributions.
+
+\subsection{Scope and Non-Claims}
+
+The theory does \emph{not} claim:
+
+\begin{itemize}
+\item The existence of a fundamental quantum of time,
+\item Modifications to diffusion dynamics,
+\item Violations of classical or quantum mechanics.
+\end{itemize}
+
+It \emph{does} claim:
+
+\begin{itemize}
+\item A fundamental information-theoretic limit on temporal inference,
+\item Universality across normal and anomalous diffusion,
+\item Experimental decidability with current technology.
+\end{itemize}
+
+\subsection{Position Within the Ontology of Continua}
+
+Within the Ontology of Continua framework, this result can be interpreted as a
+minimal physical realization of level $K_2$: time as an operationally emergent
+dimension defined by distinguishability.
+
+Importantly, the present results stand fully independently of that broader
+framework and require no ontological or metaphysical assumptions.
+
+\subsection{Summary}
+
+All assumptions are explicit, all limits are quantitative,
+and all predictions are falsifiable.
+No free parameters or interpretive ambiguities remain at the level of scaling laws.

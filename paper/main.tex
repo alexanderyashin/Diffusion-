@@ -1,0 +1,67 @@
+% ============================================================
+% main.tex
+% ============================================================
+%
+% Root document for the Zenodo preprint:
+% "K2-time as operational distinguishability in diffusion"
+%
+% Build assumptions:
+% - This file is compiled from within the "paper/" directory.
+% - All \input paths are relative to the location of this main.tex.
+% - XeLaTeX / pdfLaTeX compatibility is handled in preamble.tex.
+%
+% Scientific structure:
+% - Main text contains all primary results and scaling laws.
+% - Appendices contain detailed derivations and simulation details
+%   to ensure full reproducibility and referee-level auditability.
+%
+% ============================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% ------------------------------------------------------------
+% Preamble and metadata
+% ------------------------------------------------------------
+\input{preamble}
+\input{metadata}
+
+% ------------------------------------------------------------
+% Document
+% ------------------------------------------------------------
+\begin{document}
+
+\maketitle
+
+% ------------------------------------------------------------
+% Abstract
+% ------------------------------------------------------------
+\input{sections/00_abstract}
+
+% ------------------------------------------------------------
+% Main text
+% ------------------------------------------------------------
+\input{sections/01_assumptions_scope}
+\input{sections/02_problem_setup}
+\input{sections/03_normal_diffusion_crlb}
+\input{sections/03_joint_estimation_fisher_matrix.tex}
+\input{sections/04_kl_equivalence}
+\input{sections/05_photon_limited_regime}
+\input{sections/06_anomalous_diffusion}
+\input{sections/07_falsifiability_protocols}
+\input{sections/08_discussion_limits}
+\input{sections/09_conclusion}
+
+% ------------------------------------------------------------
+% Appendices
+% ------------------------------------------------------------
+\appendix
+\input{sections/A_appendix_derivations}
+\input{sections/B_appendix_simulations}
+
+% ------------------------------------------------------------
+% Bibliography
+% ------------------------------------------------------------
+\bibliographystyle{unsrt}
+\bibliography{bib/references}
+
+\end{document}

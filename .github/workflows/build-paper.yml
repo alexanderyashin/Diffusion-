@@ -1,0 +1,56 @@
+name: Build Paper (XeLaTeX)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-paper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Optional but recommended: speeds up repeated builds
+      - name: Cache TeXLive
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.texlive2024
+            ~/.cache/texlive
+            ~/.local/share/texlive
+          key: texlive-${{ runner.os }}-2024-v1
+
+      - name: Build LaTeX (XeLaTeX via latexmk)
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: paper
+          root_file: main.tex
+          latexmk_use_xelatex: true
+          # make failures more informative
+          args: -interaction=nonstopmode -halt-on-error -file-line-error
+          # explicitly allow bibtex (you use BibTeX, not biber)
+          latexmk_shell_escape: false
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: paper/main.pdf
+
+      # Very useful for debugging if CI fails
+      - name: Upload build logs (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-build-logs
+          path: |
+            paper/main.log
+            paper/main.blg
+            paper/main.bbl
+            paper/main.fls
+            paper/main.fdb_latexmk

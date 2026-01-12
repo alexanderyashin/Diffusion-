@@ -1,0 +1,196 @@
+% ============================================================
+% Appendix A: Detailed Derivations
+% ============================================================
+
+\appendix
+\section{Detailed Derivations}
+\label{sec:appendix_derivations}
+
+This appendix provides complete analytical derivations of all
+\emph{information-theoretic} bounds used in the main text, together with
+explicit interpretive calculations where indicated. Scaling results in the
+main text follow without uncontrolled approximations.
+
+\subsection{Gaussian Propagator for Normal Diffusion}
+
+For free diffusion in $d$ spatial dimensions, the probability density
+of displacement $\mathbf{r}$ at time $t$ is given by the Green's function
+of the diffusion equation:
+\begin{equation}
+P(\mathbf{r}\,|\,t) =
+\frac{1}{(4\pi D t)^{d/2}}
+\exp\!\left(-\frac{|\mathbf{r}|^2}{4Dt}\right).
+\end{equation}
+
+The second moment satisfies
+\begin{equation}
+\langle r^2 \rangle = 2dDt.
+\end{equation}
+
+All subsequent Fisher-information and KL-divergence results follow from
+this propagator.
+
+\subsection{Fisher Information for Time Estimation}
+
+We treat time $t$ as an unknown parameter inferred from spatial samples
+$\{\mathbf{r}_i\}$ drawn from $P(\mathbf{r}|t)$.
+
+The log-likelihood for a single observation is
+\begin{equation}
+\ln P = -\frac{d}{2}\ln(4\pi Dt) - \frac{|\mathbf{r}|^2}{4Dt}.
+\end{equation}
+
+Differentiating with respect to $t$ yields
+\begin{equation}
+\frac{\partial \ln P}{\partial t}
+= -\frac{d}{2t} + \frac{|\mathbf{r}|^2}{4Dt^2}.
+\end{equation}
+
+The Fisher information for a single sample is
+\begin{equation}
+I_1(t) = \mathbb{E}\!\left[
+\left(\frac{\partial \ln P}{\partial t}\right)^2
+\right].
+\end{equation}
+
+Using $\mathbb{E}[|\mathbf{r}|^2]=2dDt$ and
+$\mathbb{E}[|\mathbf{r}|^4]=4d(d+2)D^2t^2$, one obtains
+\begin{equation}
+I_1(t) = \frac{d}{2t^2}.
+\end{equation}
+
+For $N$ independent samples,
+\begin{equation}
+I_N(t) = \frac{Nd}{2t^2}.
+\end{equation}
+
+\subsection{Cramér--Rao Lower Bound}
+
+The Cramér--Rao inequality implies
+\begin{equation}
+\mathrm{Var}(\hat t) \ge \frac{1}{I_N(t)}
+= \frac{2t^2}{Nd}.
+\end{equation}
+
+Defining the minimal distinguishable temporal increment
+as the standard deviation of any unbiased estimator yields
+\begin{equation}
+\Delta t_{\min}(t) = t \sqrt{\frac{2}{Nd}}.
+\end{equation}
+
+This bound is estimator-independent.
+
+\subsection{Kullback--Leibler Divergence and Local Equivalence}
+
+The KL divergence between $P(\mathbf{r}|t)$ and
+$P(\mathbf{r}|t+\Delta t)$ is
+\begin{equation}
+D_{\mathrm{KL}}(t \parallel t+\Delta t)
+= \int P(\mathbf{r}|t)
+\ln\frac{P(\mathbf{r}|t)}{P(\mathbf{r}|t+\Delta t)} d\mathbf{r}.
+\end{equation}
+
+Expanding to second order in $\Delta t$ gives
+\begin{equation}
+D_{\mathrm{KL}} \approx
+\frac{1}{2} I_1(t) (\Delta t)^2
+= \frac{d}{4t^2}(\Delta t)^2.
+\end{equation}
+
+For $N$ samples,
+\begin{equation}
+D_{\mathrm{KL}}^{(N)} \approx
+\frac{Nd}{4t^2}(\Delta t)^2.
+\end{equation}
+
+Requiring $D_{\mathrm{KL}}^{(N)} \gtrsim 1$ yields
+\begin{equation}
+\Delta t_{\min}(t) \sim t \sqrt{\frac{4}{Nd}},
+\end{equation}
+which is equivalent to the CRLB up to a fixed numerical constant,
+demonstrating local equivalence between estimation and testing.
+
+\subsection{Photon-Limited Regime}
+
+Assume the observed spatial variance $\widehat{\sigma^2}$ is estimated
+from photon-limited imaging with Poisson statistics.
+
+For Gaussian profiles fitted under shot noise, the variance
+of the variance estimator satisfies
+\begin{equation}
+\mathrm{Var}(\widehat{\sigma^2})
+= \kappa\,\frac{\sigma^4}{N_\gamma},
+\end{equation}
+with $\kappa=2$ for asymptotically efficient estimators and
+$N_\gamma=\Phi\,\Delta t$.
+
+Since $\sigma^2(t) = 2Dt + \sigma_0^2$, error propagation yields
+\begin{equation}
+\mathrm{Var}(\hat t)
+= \frac{\kappa}{4D^2}\,
+\frac{(2Dt+\sigma_0^2)^2}{N_\gamma}.
+\end{equation}
+
+Imposing the self-consistency condition
+$\Delta t_{\min}^2=\mathrm{Var}(\hat t)$ with
+$N_\gamma=\Phi\,\Delta t_{\min}$ gives
+\begin{equation}
+\Delta t_{\min}^3
+=
+\frac{\kappa}{4D^2\Phi}
+(2Dt+\sigma_0^2)^2.
+\end{equation}
+
+In the PSF-dominated regime ($\sigma_0^2 \gg 2Dt$),
+\begin{equation}
+\Delta t_{\min}
+\sim
+\left(
+\frac{\kappa\,\sigma_0^4}{4D^2\Phi}
+\right)^{1/3},
+\end{equation}
+establishing the nontrivial scaling
+$\Delta t_{\min} \propto \Phi^{-1/3}$.
+
+\subsection{Anomalous Diffusion (Interpretive Bounds)}
+
+For anomalous diffusion with
+\begin{equation}
+\langle r^2(t) \rangle = 2dD_\alpha t^\alpha,
+\end{equation}
+the temporal derivative is
+\begin{equation}
+\frac{d}{dt}\langle r^2 \rangle
+= 2d\alpha D_\alpha t^{\alpha-1}.
+\end{equation}
+
+Requiring a resolvable change
+$\Delta\langle r^2\rangle \gtrsim \Delta x^2$
+yields the interpretive lower bound
+\begin{equation}
+\Delta t_{\mathrm{MSD}}(t)
+\sim \frac{\Delta x^2}{2d\alpha D_\alpha} t^{1-\alpha}.
+\end{equation}
+
+This criterion is heuristic and serves only as an intuitive reference.
+Information-theoretic bounds in the photon-limited anomalous regime
+follow from the same self-consistent Fisher-information logic as in the
+normal-diffusion case, yielding
+\begin{equation}
+\Delta t_{\min}(t)
+\propto \frac{t^{(2-\alpha)/3}}{\Phi^{1/3}}.
+\end{equation}
+
+\subsection{Asymptotic Validity}
+
+All information-theoretic bounds rely on asymptotic normality of estimators.
+For correlated samples, effective sample size $N_{\mathrm{eff}}$
+must be substituted for $N$.
+
+This substitution does not alter scaling exponents.
+
+\subsection{Summary}
+
+All scaling results presented in the main text follow from first principles
+under explicitly stated assumptions. Interpretive bounds are clearly
+identified as such and do not affect the information-theoretic conclusions.

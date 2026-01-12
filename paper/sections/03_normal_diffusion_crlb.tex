@@ -1,0 +1,131 @@
+% ============================================================
+% 03_normal_diffusion_crlb.tex
+% ============================================================
+
+\section{Normal Diffusion: Fisher Information and Cramér--Rao Bounds}
+\label{sec:normal_diffusion_crlb}
+
+We begin with the simplest and analytically tractable case: free normal diffusion
+with a Gaussian propagator. This section establishes Fisher information and
+Cramér--Rao lower bounds (CRLB) for time inference, including explicit numerical
+coefficients and confidence levels.
+
+\subsection{Model Definition}
+
+Consider a $d$-dimensional diffusive process with diffusion coefficient $D>0$.
+For normal diffusion, each spatial coordinate has variance $2Dt$.
+The latent spatial distribution at time $t$ is therefore Gaussian:
+\begin{equation}
+p(x \mid t) = \frac{1}{(4\pi D t)^{d/2}}
+\exp\!\left( - \frac{\|x\|^2}{4 D t} \right), \quad x \in \mathbb{R}^d .
+\end{equation}
+
+In the presence of a Gaussian observation noise floor $\sigma_0^2$ (PSF or localization
+error), the observed distribution becomes
+\begin{equation}
+p_{\mathrm{obs}}(x \mid t)
+= \mathcal{N}\!\left( 0, \, s(t) I_d \right),
+\qquad
+s(t) := 2 D t + \sigma_0^2 .
+\end{equation}
+
+We first treat the case where $D$ and $\sigma_0$ are known parameters; joint estimation
+is addressed separately.
+
+\subsection{Score Function}
+
+The log-likelihood for a single observation is
+\begin{equation}
+\log p_{\mathrm{obs}}(x \mid t)
+= -\frac{d}{2}\log(2\pi s(t))
+  -\frac{\|x\|^2}{2 s(t)} .
+\end{equation}
+
+Differentiating with respect to $t$ yields the score function
+\begin{equation}
+\frac{\partial}{\partial t}\log p_{\mathrm{obs}}(x \mid t)
+= D\left(
+    \frac{\|x\|^2}{s(t)^2}
+    - \frac{d}{s(t)}
+  \right).
+\end{equation}
+
+\subsection{Fisher Information}
+
+The Fisher information for a single observation is defined as
+\begin{equation}
+I_1(t)
+:= \mathbb{E}\!\left[
+    \left(
+      \frac{\partial}{\partial t}\log p_{\mathrm{obs}}(X \mid t)
+    \right)^2
+  \right].
+\end{equation}
+
+Using the Gaussian moments
+\[
+\mathbb{E}[\|X\|^2] = d\, s(t),
+\qquad
+\mathbb{E}[\|X\|^4] = d(d+2)\, s(t)^2 ,
+\]
+a direct calculation gives
+\begin{equation}
+I_1(t)
+= \frac{2 d D^2}{s(t)^2}
+= \frac{2 d D^2}{\left(2 D t + \sigma_0^2\right)^2}.
+\end{equation}
+
+For $N_{\mathrm{eff}}$ statistically independent (or effectively independent)
+observations, Fisher information is additive:
+\begin{equation}
+I_{\mathrm{eff}}(t)
+= N_{\mathrm{eff}} I_1(t).
+\end{equation}
+
+\subsection{Cramér--Rao Lower Bound}
+
+For any unbiased estimator $\hat t$ of the time parameter,
+\begin{equation}
+\mathrm{Var}(\hat t)
+\ge \frac{1}{I_{\mathrm{eff}}(t)}
+= \frac{\left(2 D t + \sigma_0^2\right)^2}
+       {2 d D^2 N_{\mathrm{eff}}}.
+\end{equation}
+
+Introducing a confidence multiplier $z$ (e.g., $z=1$ for one standard deviation,
+$z=1.96$ for 95\% confidence), we define the minimal distinguishable time increment
+\begin{equation}
+\Delta t_{\min}^{\mathrm{CRLB}}(t; z)
+:= z \sqrt{\mathrm{Var}(\hat t)}
+= z \frac{2 D t + \sigma_0^2}{\sqrt{2 d}\, D \sqrt{N_{\mathrm{eff}}}} .
+\end{equation}
+
+\subsection{Limiting Regimes}
+
+Two experimentally relevant regimes follow immediately.
+
+\paragraph{PSF-dominated regime ($2Dt \ll \sigma_0^2$).}
+\begin{equation}
+\Delta t_{\min}^{\mathrm{CRLB}}
+\approx
+z \frac{\sigma_0^2}{\sqrt{2 d}\, D \sqrt{N_{\mathrm{eff}}}},
+\end{equation}
+which is independent of $t$.
+
+\paragraph{Diffusion-dominated regime ($2Dt \gg \sigma_0^2$).}
+\begin{equation}
+\Delta t_{\min}^{\mathrm{CRLB}}
+\approx
+z \sqrt{\frac{2}{d}}
+\frac{t}{\sqrt{N_{\mathrm{eff}}}} .
+\end{equation}
+
+These expressions provide exact bounds within the stated Gaussian diffusion model
+and observation assumptions.
+
+\subsection{Interpretation}
+
+The bounds above quantify a fundamental limitation on inferring elapsed time from
+spatial data. They do not imply any modification of the underlying dynamics and do
+not introduce a discrete time scale. Instead, they express the degradation of temporal
+information caused by finite spatial resolution, finite statistics, and noise.

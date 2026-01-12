@@ -1,0 +1,139 @@
+% ============================================================
+% 07_falsifiability_protocols.tex
+% ============================================================
+
+\section{Falsifiability and Experimental Protocols}
+\label{sec:falsifiability}
+
+This work makes quantitative, testable predictions. In this section we formulate
+explicit experimental protocols and statistical criteria under which the theory
+can be confirmed or falsified within controlled uncertainty bounds.
+
+\subsection{Core Falsifiable Predictions}
+
+The theory predicts the following universal scaling laws:
+
+\begin{enumerate}
+\item \textbf{Statistical regime (CRLB):}
+\[
+\Delta t_{\min}(t) \sim t \sqrt{\frac{2}{dN}}
+\]
+for independent samples drawn from a Gaussian propagator.
+
+\item \textbf{Photon-limited regime:}
+\[
+\Delta t_{\min} \propto \Phi^{-1/3}
+\]
+independently of $D$, $\alpha$, and dimensionality $d$.
+
+\item \textbf{Anomalous diffusion scaling:}
+\[
+\Delta t_{\min}(t) \propto
+\begin{cases}
+t^{1-\alpha}, & \text{resolution-limited (interpretive bound)},\\[4pt]
+t^{(2-\alpha)/3}, & \text{photon-limited}.
+\end{cases}
+\]
+\end{enumerate}
+
+Systematic and statistically significant deviations from these scaling exponents
+constitute a refutation of the corresponding regime.
+
+\subsection{Experimental Platforms}
+
+The predictions can be tested using the following established techniques:
+
+\paragraph{Single-Particle Tracking (SPT).}
+Fluorescent tracer particles in aqueous or viscoelastic media.
+Time inferred from spatial distributions rather than timestamps.
+
+\paragraph{Fluorescence Correlation Spectroscopy (FCS).}
+Temporal resolution inferred from spatial autocorrelation functions.
+
+\paragraph{Confocal or Light-Sheet Microscopy.}
+Controlled photon flux $\Phi$ and point-spread function $\sigma_0$.
+
+\subsection{Controlled Experimental Parameters}
+
+Each protocol must explicitly control:
+
+\begin{itemize}
+\item Photon flux $\Phi$ (via laser power or exposure time),
+\item Effective spatial resolution $\Delta x$ or PSF width $\sigma_0$,
+\item Medium properties determining $D$ or $D_\alpha$,
+\item Dimensionality $d$ (2D membrane vs.\ 3D bulk),
+\item Number of independent trajectories $N$.
+\end{itemize}
+
+\subsection{Statistical Test for Scaling Exponents}
+
+Scaling laws are tested via log--log regression. Let
+$\Delta t_{\min} \propto X^\beta$ for a control parameter $X$.
+
+\paragraph{Null hypothesis.}
+The measured exponent $\hat{\beta}$ differs from the predicted value $\beta_0$.
+
+\paragraph{Test statistic.}
+\[
+z = \frac{\hat{\beta}-\beta_0}{\mathrm{SE}(\hat{\beta})},
+\]
+where $\mathrm{SE}(\hat{\beta})$ is the standard error of the regression estimate,
+assumed approximately normal in the asymptotic regime.
+
+\paragraph{Rejection criterion.}
+The theory is falsified for the tested regime if
+$|z| > z_{\alpha/2}$ at confidence level $1-\alpha$
+(e.g., $z_{0.025}=1.96$).
+
+\subsection{Photon-Limited Refutation Criterion}
+
+The photon-limited regime is refuted if
+\begin{equation}
+\frac{d\log \Delta t_{\min}}{d\log \Phi} \neq -\frac{1}{3}
+\end{equation}
+within statistical uncertainty across at least one order of magnitude in $\Phi$.
+
+\subsection{Resolution-Limited Refutation Criterion}
+
+The resolution-limited (interpretive) regime is refuted if
+\begin{equation}
+\Delta t_{\min} \not\propto \Delta x^2
+\end{equation}
+when $\sigma_0^2 \gg 2dD_\alpha t^\alpha$, after accounting for finite-sample effects.
+
+\subsection{Anomalous Exponent Validation}
+
+The anomalous exponent $\alpha$ must be independently estimated from the MSD scaling
+\[
+\langle r^2(t) \rangle \sim t^\alpha.
+\]
+
+The framework is falsified if the inferred temporal scaling of $\Delta t_{\min}(t)$
+is statistically inconsistent with the independently measured $\alpha$.
+
+\subsection{Control Experiments}
+
+The following controls are mandatory:
+
+\begin{itemize}
+\item Advection suppression: $\mathrm{Pe} \ll 1$,
+\item Motion-blur correction via exposure-time deconvolution,
+\item Background-noise subtraction and photobleaching correction,
+\item Verification of estimator efficiency via Monte Carlo simulation.
+\end{itemize}
+
+\subsection{Summary of Falsification Conditions}
+
+The theory is considered falsified for a given regime if one or more of the following
+are observed:
+
+\begin{enumerate}
+\item Scaling exponents differ significantly from predictions,
+\item Photon-limited $\Phi^{-1/3}$ scaling fails,
+\item Resolution-limited $\Delta x^2$ scaling fails,
+\item Anomalous exponent $\alpha$ fails cross-consistency,
+\item Deviations persist under all control corrections.
+\end{enumerate}
+
+These criteria ensure that the framework is fully Popper-falsifiable and
+experimentally decidable.
