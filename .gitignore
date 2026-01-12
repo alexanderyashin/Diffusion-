@@ -33,3 +33,6 @@ Thumbs.db
 
 # --- Allow release figures (keep these in git if desired) ---
 !figs/*.pdf
+
+# accidental shell/clipboard artifacts
+tructure and polish Appendix D"
