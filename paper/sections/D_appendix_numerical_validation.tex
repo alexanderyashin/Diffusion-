@@ -4,17 +4,16 @@
 % (FULL REPLACEMENT — content preserved, updated for strictness)
 % ============================================================
 
-\appendix
 \section{Appendix D: Numerical Validation, Figures, and Joint Estimation}
 \label{app:numerical_validation}
 
 \subsection{D.1 Scope and purpose of numerical validation}
 
-This appendix provides quantitative numerical validation of the theoretical limits derived in the main text and Appendices A–C.
+This appendix provides quantitative numerical validation of the theoretical limits derived in the main text and Appendices~A--C.
 The goals are fourfold:
 
 \begin{enumerate}
-    \item To verify the Fisher-information-based Cramér–Rao lower bounds (CRLB) via Monte Carlo simulations.
+    \item To verify the Fisher-information-based Cramér--Rao lower bounds (CRLB) via Monte Carlo simulations.
     \item To confirm the photon-limited temporal resolution scaling $\Delta t_{\min} \propto \Phi^{-1/3}$ numerically.
     \item To demonstrate the practical equivalence between estimation-theoretic (CRLB) and hypothesis-testing (KL divergence) formulations.
     \item To assess the robustness of the time distinguishability limit under joint estimation of $(t, D, \sigma_0)$.
@@ -29,7 +28,7 @@ Throughout, $N_{\mathrm{eff}}$ denotes the effective number of statistically ind
 
 We consider free Brownian motion in $d$ dimensions with propagator
 \[
-P(\mathbf{x}|t) = (4\pi D t)^{-d/2} \exp\!\left(-\frac{|\mathbf{x}|^2}{4Dt}\right),
+P(\mathbf{x}\,|\,t) = (4\pi D t)^{-d/2}\exp\!\left(-\frac{\lvert \mathbf{x}\rvert^2}{4Dt}\right),
 \]
 with known diffusion coefficient $D$ and negligible initial width $\sigma_0 = 0$.
 
@@ -39,7 +38,7 @@ The empirical variance $\mathrm{Var}(\hat{t})$ is compared to the theoretical bo
 \mathrm{Var}(\hat{t}) \ge \frac{2 t^2}{d N_{\mathrm{eff}}}.
 \]
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.75\textwidth]{../figs/fig_D1_crlb_vs_Neff.pdf}
 \caption{Monte Carlo verification of the CRLB for time estimation in normal diffusion.
@@ -52,7 +51,8 @@ The simulations confirm that no unbiased estimator can asymptotically outperform
 
 ---
 
-\subsection{D.3 Photon-limited regime and $\Phi^{-1/3}$ scaling}
+\subsection{D.3 Photon-limited regime and \texorpdfstring{$\Phi^{-1/3}$}{Phi^{-1/3}} scaling}
+
 
 We now consider the experimentally relevant photon-limited regime.
 Let the observed width satisfy
@@ -74,11 +74,11 @@ Imposing self-consistency of time estimation yields
 \left(\frac{\sigma_{\mathrm{obs}}^4}{2 d^2 D^2 \Phi}\right)^{1/3}.
 \]
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.75\textwidth]{../figs/fig_D2_photon_scaling.pdf}
 \caption{Photon-limited temporal resolution.
-Log–log plot of $\Delta t_{\min}$ versus photon flux $\Phi$.
+Log--log plot of $\Delta t_{\min}$ versus photon flux $\Phi$.
 The slope $-1/3$ is confirmed numerically, validating the self-consistent scaling prediction.}
 \label{fig:D2}
 \end{figure}
@@ -89,16 +89,16 @@ This scaling is fundamentally distinct from the familiar $\sim \Phi^{-1/2}$ beha
 
 \subsection{D.4 CRLB versus KL-divergence distinguishability}
 
-To connect estimation and hypothesis testing, we numerically evaluate the Kullback–Leibler divergence
+To connect estimation and hypothesis testing, we numerically evaluate the Kullback--Leibler divergence
 \[
-D_{\mathrm{KL}}\!\left(P(\cdot|t) \Vert P(\cdot|t+\Delta t)\right)
+D_{\mathrm{KL}}\!\left(P(\cdot\,|\,t)\,\Vert\,P(\cdot\,|\,t+\Delta t)\right)
 \]
 from Monte Carlo samples and compare it with the quadratic Fisher approximation
 \[
-D_{\mathrm{KL}} \approx \tfrac{1}{2} I(t) (\Delta t)^2.
+D_{\mathrm{KL}} \approx \tfrac{1}{2} I(t)\, (\Delta t)^2.
 \]
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.75\textwidth]{../figs/fig_D3_kl_vs_crlb.pdf}
 \caption{Empirical equivalence between CRLB and KL distinguishability.
@@ -112,17 +112,17 @@ This demonstrates that the temporal distinguishability limit is formulation-inde
 
 ---
 
-\subsection{D.5 Joint estimation of $(t, D, \sigma_0)$}
+\subsection{D.5 Joint estimation of \texorpdfstring{$(t, D, \sigma_0)$}{(t, D, sigma0)}}
 
 A common objection is that the main results assume known $D$ and $\sigma_0$.
 To address this, we distinguish two mathematically different settings:
 
 \begin{enumerate}
     \item \textbf{Identifiable joint estimation (data provide sufficient information).}
-    A finite frequentist joint CRLB $\mathrm{Var}(\hat t)\ge (\mathbf{J}^{-1})_{tt}$ exists only if the parameters are identifiable from the observation model, i.e. the Fisher information matrix $\mathbf{J}$ is full rank (or, more generally, $(\mathbf{J}^{-1})_{tt}$ is finite after restricting to the identifiable subspace).
+    A finite frequentist joint CRLB $\mathrm{Var}(\hat t)\ge (\mathbf{J}^{-1})_{tt}$ exists only if the parameters are identifiable from the observation model, i.e.\ the Fisher information matrix $\mathbf{J}$ is full rank (or, more generally, $(\mathbf{J}^{-1})_{tt}$ is finite after restricting to the identifiable subspace).
 
     \item \textbf{Non-identifiable single-time setting (variance-only degeneracy).}
-    If the likelihood depends on the parameters only through a single scalar combination (e.g. an effective variance), then $\mathbf{J}$ from the data is rank-deficient and the frequentist joint CRLB for $t$ is not finite without adding additional information (e.g.\ multi-time data, independent observables, or calibration constraints).
+    If the likelihood depends on the parameters only through a single scalar combination (e.g.\ an effective variance), then $\mathbf{J}$ from the data is rank-deficient and the frequentist joint CRLB for $t$ is not finite without adding additional information (e.g.\ multi-time data, independent observables, or calibration constraints).
 \end{enumerate}
 
 For the Gaussian diffusion observation model with additive width floor,
@@ -132,7 +132,7 @@ For the Gaussian diffusion observation model with additive width floor,
 s(t)=2Dt+\sigma_0^2,
 \]
 a \emph{single-time} snapshot enters the likelihood only through the scalar $s$; thus the observation Fisher information in $(t,D,\sigma_0^2)$ is rank-1 and joint estimation is non-identifiable from that snapshot alone.
-Accordingly, any finite ``joint'' bound in this single-time case necessarily encodes \emph{additional information} beyond the snapshot itself (for example, external calibration of $D$ and/or $\sigma_0^2),$ and is best interpreted as a posterior/Bayesian CRLB rather than a pure data-driven frequentist CRLB.
+Accordingly, any finite ``joint'' bound in this single-time case necessarily encodes \emph{additional information} beyond the snapshot itself (for example, external calibration of $D$ and/or $\sigma_0^2$), and is best interpreted as a posterior/Bayesian CRLB rather than a pure data-driven frequentist CRLB.
 
 In contrast, with \emph{identifying information} (e.g.\ observations at multiple times, or additional independent measurements that break the degeneracy), the joint Fisher information matrix becomes full rank and a finite frequentist joint CRLB exists.
 In that identifiable regime, nuisance couplings (off-diagonal terms) can inflate $\mathrm{Var}(\hat t)$ by a multiplicative factor, but they do not change the fundamental scaling exponents with $N_{\mathrm{eff}}$ and $\Phi$ that are set by the information content of the observation model.
@@ -152,7 +152,7 @@ When $\mathbf{J}$ is full rank, inverting $\mathbf{J}$ yields the joint CRLB
 \mathrm{Var}(\hat{t}) \ge (\mathbf{J}^{-1})_{tt}.
 \]
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.75\textwidth]{../figs/fig_D4_joint_estimation_penalty.pdf}
 \caption{Penalty due to joint estimation.
